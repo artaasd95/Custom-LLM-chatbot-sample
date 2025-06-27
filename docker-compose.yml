@@ -1,0 +1,223 @@
+version: '3.8'
+
+services:
+  # Main LLM Server
+  llm-server:
+    build:
+      context: .
+      target: serving
+    container_name: llm-server
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONPATH=/app/src
+      - LOG_LEVEL=INFO
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - llm-network
+
+  # Training Service (on-demand)
+  llm-trainer:
+    build:
+      context: .
+      target: training
+    container_name: llm-trainer
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - CUDA_VISIBLE_DEVICES=0,1
+      - PYTHONPATH=/app/src
+      - LOG_LEVEL=INFO
+      - WANDB_API_KEY=${WANDB_API_KEY:-}
+      - COMET_API_KEY=${COMET_API_KEY:-}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles:
+      - training
+    networks:
+      - llm-network
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    container_name: llm-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 1gb --maxmemory-policy allkeys-lru
+    restart: unless-stopped
+    networks:
+      - llm-network
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: llm-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    profiles:
+      - monitoring
+    networks:
+      - llm-network
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: llm-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    profiles:
+      - monitoring
+    networks:
+      - llm-network
+
+  # Load Balancer (Nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: llm-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - llm-server
+    restart: unless-stopped
+    profiles:
+      - production
+    networks:
+      - llm-network
+
+  # Development Environment
+  llm-dev:
+    build:
+      context: .
+      target: development
+    container_name: llm-dev
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8888:8888"  # Jupyter
+    volumes:
+      - .:/app
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONPATH=/app/src
+      - LOG_LEVEL=DEBUG
+      - JUPYTER_ENABLE_LAB=yes
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    profiles:
+      - development
+    networks:
+      - llm-network
+    command: >
+      bash -c "
+        jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password='' &
+        tail -f /dev/null
+      "
+
+  # Database for experiment tracking (optional)
+  postgres:
+    image: postgres:15-alpine
+    container_name: llm-postgres
+    environment:
+      - POSTGRES_DB=llm_experiments
+      - POSTGRES_USER=llm_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-llm_password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    profiles:
+      - database
+    networks:
+      - llm-network
+
+volumes:
+  redis-data:
+  prometheus-data:
+  grafana-data:
+  postgres-data:
+
+networks:
+  llm-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# Environment-specific configurations
+x-common-variables: &common-variables
+  PYTHONPATH: /app/src
+  LOG_LEVEL: INFO
+  TZ: UTC
+
+# Resource limits
+x-resource-limits: &resource-limits
+  deploy:
+    resources:
+      limits:
+        memory: 16G
+      reservations:
+        memory: 8G
