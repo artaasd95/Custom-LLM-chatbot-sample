@@ -1,33 +1,37 @@
 # Custom LLM Chatbot
 
-A comprehensive, scalable system for training and serving custom Large Language Models (LLMs) with support for multiple training methods, high-performance inference, and production-ready deployment.
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](./docs/README.md)
 
-## 🚀 Features
+A comprehensive, production-ready Large Language Model (LLM) chatbot system with advanced training capabilities, multiple serving backends, and enterprise-grade monitoring.
 
-### Training Capabilities
-- **Multiple Training Methods**: Fine-tuning, LoRA, DPO, and training from scratch
-- **Distributed Training**: Multi-GPU support with Accelerate and DeepSpeed
-- **Advanced Optimizations**: Gradient checkpointing, mixed precision, memory optimization
-- **Experiment Tracking**: Integration with Weights & Biases, Comet ML, and MLflow
-- **Comprehensive Metrics**: Training loss, perplexity, BLEU, ROUGE, and custom metrics
+## 🌟 Key Features
 
-### Serving & Inference
-- **Multiple Backends**: PyTorch, ONNX Runtime, and vLLM for high-performance serving
-- **API Server**: FastAPI-based REST API with streaming support
-- **Load Balancing**: Built-in request queuing and concurrent processing
-- **Performance Monitoring**: Real-time metrics and health checks
+### 🎯 **Training & Fine-tuning**
+- **Multiple Training Methods**: From-scratch training, Supervised Fine-Tuning (SFT), LoRA, and Direct Preference Optimization (DPO)
+- **Advanced Optimizations**: Memory-efficient training with gradient checkpointing, mixed precision, and DeepSpeed integration
+- **Flexible Data Processing**: Support for various data formats with built-in preprocessing and validation
+- **Experiment Tracking**: Integrated support for Weights & Biases, MLflow, and Comet ML
 
-### Data Processing
-- **Multi-format Support**: JSON, JSONL, CSV, TXT, PDF, DOCX
-- **Flexible Data Structures**: Text, instruction, conversation, and DPO formats
-- **Preprocessing Pipeline**: Text cleaning, chunking, and normalization
-- **Data Validation**: Automatic format detection and validation
+### 🚀 **High-Performance Serving**
+- **Multiple Backends**: PyTorch, ONNX Runtime, and vLLM for optimal performance
+- **Production-Ready API**: FastAPI-based REST API with OpenAI compatibility
+- **Real-time Streaming**: WebSocket and Server-Sent Events support
+- **Scalable Architecture**: Load balancing, request batching, and GPU optimization
 
-### Production Ready
+### 📊 **Monitoring & Observability**
+- **Comprehensive Metrics**: Performance, resource utilization, and business metrics
+- **Real-time Dashboard**: Streamlit-based monitoring interface
+- **Health Checks**: Automated system health monitoring and alerting
+- **Prometheus Integration**: Industry-standard metrics collection
+
+### 🔧 **Developer Experience**
+- **Modular Design**: Clean, extensible architecture with clear separation of concerns
 - **Configuration Management**: YAML-based configuration with validation
-- **Logging & Monitoring**: Comprehensive logging and experiment tracking
-- **Error Handling**: Robust error handling and recovery mechanisms
-- **Security**: Best practices for API security and model protection
+- **Comprehensive Testing**: Unit tests, integration tests, and performance benchmarks
+- **Rich Documentation**: Detailed guides, API reference, and examples
 
 ## 📋 Requirements
 
