@@ -84,7 +84,7 @@ This documentation is organized into the following sections:
 This documentation is maintained alongside the codebase. For the latest updates:
 - Check the main [README](../README.md) for recent changes
 - Review the [CHANGELOG](../CHANGELOG.md) for version-specific updates
-- Visit the [GitHub repository](https://github.com/your-org/custom-llm-chatbot) for the latest code
+- Visit the [GitHub repository](https://github.com/artaasd95/custom-llm-chatbot) for the latest code
 
 ## 📞 Support
 
