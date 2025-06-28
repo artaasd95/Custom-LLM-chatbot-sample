@@ -1,0 +1,113 @@
+# Streamlit UI Configuration for Custom LLM Chatbot
+
+# Server Configuration
+server:
+  host: "localhost"
+  port: 8000
+  base_url: "http://localhost:8000"
+  timeout: 60
+  health_check_interval: 30
+
+# UI Configuration
+ui:
+  title: "Custom LLM Chatbot"
+  page_icon: "🤖"
+  layout: "wide"
+  theme: "light"  # light, dark, auto
+  
+  # Chat settings
+  chat:
+    max_history: 100
+    auto_scroll: true
+    show_timestamps: false
+    show_metadata: true
+    
+  # Sidebar settings
+  sidebar:
+    show_server_status: true
+    show_statistics: true
+    show_generation_settings: true
+    expanded_by_default: true
+
+# Default Generation Parameters
+generation:
+  max_tokens: 512
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  repetition_penalty: 1.1
+  stop_sequences: []
+  
+  # Parameter ranges for UI controls
+  ranges:
+    max_tokens:
+      min: 1
+      max: 2048
+      step: 1
+    temperature:
+      min: 0.0
+      max: 2.0
+      step: 0.1
+    top_p:
+      min: 0.0
+      max: 1.0
+      step: 0.05
+    top_k:
+      min: 1
+      max: 100
+      step: 1
+    repetition_penalty:
+      min: 1.0
+      max: 2.0
+      step: 0.1
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null  # Set to file path to enable file logging
+
+# Advanced Features
+features:
+  enable_streaming: false  # Future feature
+  enable_conversation_export: true
+  enable_prompt_templates: true
+  enable_model_switching: false  # Future feature
+  
+# Prompt Templates
+prompt_templates:
+  - name: "General Chat"
+    template: "{user_input}"
+    description: "Direct conversation with the model"
+    
+  - name: "Code Assistant"
+    template: "You are a helpful coding assistant. Please help with the following:\n\n{user_input}"
+    description: "Get help with coding tasks"
+    
+  - name: "Creative Writing"
+    template: "You are a creative writing assistant. Please help create engaging content for:\n\n{user_input}"
+    description: "Assistance with creative writing tasks"
+    
+  - name: "Question Answering"
+    template: "Please provide a detailed and accurate answer to the following question:\n\n{user_input}"
+    description: "Get detailed answers to questions"
+    
+  - name: "Summarization"
+    template: "Please provide a concise summary of the following text:\n\n{user_input}"
+    description: "Summarize text content"
+
+# Custom CSS Styling
+styling:
+  primary_color: "#1f77b4"
+  secondary_color: "#9c27b0"
+  background_color: "#ffffff"
+  text_color: "#000000"
+  
+  # Message styling
+  user_message_bg: "#e3f2fd"
+  assistant_message_bg: "#f3e5f5"
+  
+  # Status indicators
+  online_color: "#4caf50"
+  offline_color: "#f44336"
+  warning_color: "#ff9800"

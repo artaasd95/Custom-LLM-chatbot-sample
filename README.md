@@ -223,6 +223,86 @@ curl "http://localhost:8000/health"
 curl "http://localhost:8000/stats"
 ```
 
+### Web UI (Streamlit)
+
+The system includes a modern web interface built with Streamlit for easy interaction with your trained models.
+
+#### Quick Start
+```bash
+# Start the LLM server first
+python serve.py --server-type vllm --model-path your-model-path
+
+# In another terminal, start the UI
+python run_ui.py
+```
+
+The UI will be available at `http://localhost:8501`
+
+#### Advanced UI Usage
+```bash
+# Custom host and port
+python run_ui.py --host 0.0.0.0 --port 8502
+
+# Connect to remote LLM server
+python run_ui.py --server-url http://remote-server:8000
+
+# Use dark theme
+python run_ui.py --theme dark
+
+# Auto-open browser
+python run_ui.py --browser
+```
+
+#### UI Features
+
+- **Real-time Chat Interface**: Interactive conversation with your LLM
+- **Server Status Monitoring**: Live server health and performance metrics
+- **Generation Controls**: Adjust temperature, top-p, top-k, and other parameters
+- **Prompt Templates**: Pre-configured templates for different use cases:
+  - General Chat
+  - Code Assistant
+  - Creative Writing
+  - Question Answering
+  - Summarization
+- **Conversation Export**: Save chat history as JSON
+- **Responsive Design**: Works on desktop and mobile devices
+
+#### UI Configuration
+
+Customize the UI behavior by editing `ui_config.yaml`:
+
+```yaml
+# Server connection
+server:
+  base_url: "http://localhost:8000"
+  timeout: 60
+
+# UI settings
+ui:
+  title: "Custom LLM Chatbot"
+  page_icon: "🤖"
+  layout: "wide"
+
+# Default generation parameters
+generation:
+  max_tokens: 512
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  repetition_penalty: 1.1
+
+# Custom prompt templates
+prompt_templates:
+  - name: "Code Assistant"
+    template: "You are a helpful coding assistant. Please help with: {user_input}"
+    description: "Get help with coding tasks"
+```
+
+#### Alternative UI Files
+
+- `streamlit_ui.py`: Basic UI with core functionality
+- `streamlit_app.py`: Enhanced UI with configuration support and advanced features
+
 ## 📊 Data Formats
 
 The system supports multiple data formats for training:
