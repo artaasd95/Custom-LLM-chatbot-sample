@@ -22,7 +22,7 @@ This documentation is organized into the following sections:
 ### Advanced Topics
 - **[Training Methods](./training-methods.md)** - From-scratch, DPO, LoRA, and fine-tuning
 - **[Model Optimization](./model-optimization.md)** - Performance optimization techniques
-- **[Deployment Guide](./deployment.md)** - Production deployment strategies
+- **[Deployment Guide](./deployment-guide.md)** - Production deployment strategies
 - **[API Reference](./api-reference.md)** - Complete API documentation
 
 ### Development
@@ -68,7 +68,7 @@ This documentation is organized into the following sections:
 3. Check [Monitoring System](./monitoring/) for experiment tracking
 
 ### For DevOps Engineers
-1. Follow the [Deployment Guide](./deployment.md) for production deployment
+1. Follow the [Deployment Guide](./deployment-guide.md) for production deployment
 2. Review [Configuration Guide](./configuration.md) for system configuration
 3. Check [Troubleshooting](./troubleshooting.md) for operational issues
 
