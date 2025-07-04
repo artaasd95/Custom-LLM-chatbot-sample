@@ -40,7 +40,7 @@ setup(
     description="A comprehensive framework for training, fine-tuning, and serving Large Language Models",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/your-org/custom-llm-chatbot",
+    url="https://github.com/artaasd95/Custom-LLM-chatbot-sample",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
@@ -130,8 +130,8 @@ setup(
         "natural language processing",
     ],
     project_urls={
-        "Bug Reports": "https://github.com/your-org/custom-llm-chatbot/issues",
-        "Source": "https://github.com/your-org/custom-llm-chatbot",
+        "Bug Reports": "https://github.com/artaasd95/Custom-LLM-chatbot-sample/issues",
+        "Source": "https://github.com/artaasd95/Custom-LLM-chatbot-sample",
         "Documentation": "https://custom-llm-chatbot.readthedocs.io/",
     },
 )

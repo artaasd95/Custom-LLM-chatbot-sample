@@ -187,6 +187,6 @@ CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 LABEL maintainer="Custom LLM Team <team@customllm.com>"
 LABEL version="1.0.0"
 LABEL description="Custom LLM Chatbot - Training and Serving Framework"
-LABEL org.opencontainers.image.source="https://github.com/your-org/custom-llm-chatbot"
+LABEL org.opencontainers.image.source="https://github.com/artaasd95/Custom-LLM-chatbot-sample"
 LABEL org.opencontainers.image.documentation="https://custom-llm-chatbot.readthedocs.io/"
 LABEL org.opencontainers.image.licenses="MIT"

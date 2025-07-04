@@ -46,7 +46,7 @@ Comprehensive installation guide for the Custom LLM Chatbot system across differ
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/custom-llm-chatbot.git
+git clone https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
 cd custom-llm-chatbot
 ```
 
@@ -90,7 +90,7 @@ python -m pytest tests/test_project_structure.py -v
 
 ```bash
 # Clone with development branch
-git clone -b develop https://github.com/your-org/custom-llm-chatbot.git
+git clone -b develop https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
 cd custom-llm-chatbot
 
 # Create development environment
@@ -379,8 +379,8 @@ pip install --user -r requirements.txt
 ### Getting Help
 
 - **Documentation**: Check the [docs](./README.md) for detailed guides
-- **Issues**: Report bugs on [GitHub Issues](https://github.com/your-org/custom-llm-chatbot/issues)
-- **Discussions**: Join [GitHub Discussions](https://github.com/your-org/custom-llm-chatbot/discussions)
+- **Issues**: Report bugs on [GitHub Issues](https://github.com/artaasd95/Custom-LLM-chatbot-sample/issues)
+- **Discussions**: Join [GitHub Discussions](https://github.com/artaasd95/Custom-LLM-chatbot-sample/discussions)
 - **Community**: Join our [Discord server](https://discord.gg/your-server)
 
 ### System Information

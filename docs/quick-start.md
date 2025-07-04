@@ -41,7 +41,7 @@ nvidia-smi
 
 ```bash
 # Clone and setup in one go
-git clone https://github.com/your-org/Custom-LLM-chatbot-sample.git
+git clone https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
 cd Custom-LLM-chatbot-sample
 ./scripts/quick_setup.sh
 ```
@@ -50,7 +50,7 @@ cd Custom-LLM-chatbot-sample
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-org/Custom-LLM-chatbot-sample.git
+git clone https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
 cd Custom-LLM-chatbot-sample
 
 # 2. Create virtual environment
@@ -400,7 +400,7 @@ python train.py
 ### Community Resources
 
 - **Discord**: [Join our community](https://discord.gg/llm-chatbot)
-- **GitHub Discussions**: [Ask questions](https://github.com/your-org/Custom-LLM-chatbot-sample/discussions)
+- **GitHub Discussions**: [Ask questions](https://github.com/artaasd95/Custom-LLM-chatbot-sample/discussions)
 - **Blog**: [Latest tutorials](https://blog.example.com/llm-tutorials)
 - **YouTube**: [Video tutorials](https://youtube.com/llm-tutorials)
 

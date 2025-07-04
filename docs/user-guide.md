@@ -50,7 +50,7 @@ The Custom LLM Chatbot is a comprehensive system for training, fine-tuning, and 
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/custom-llm-chatbot.git
+git clone https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
 cd custom-llm-chatbot
 
 # Create virtual environment

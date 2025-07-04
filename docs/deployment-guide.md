@@ -163,7 +163,7 @@ logging:
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/custom-llm-chatbot.git
+git clone https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
 cd custom-llm-chatbot
 
 # Create virtual environment

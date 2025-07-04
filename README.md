@@ -55,7 +55,7 @@ See `requirements.txt` for complete list. Key dependencies:
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/artaasd95/Custom-LLM-chatbot-sample.git
    cd Custom-LLM-chatbot-sample
    ```
 
